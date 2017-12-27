@@ -17,9 +17,7 @@ nb_classes = len(classes)
 img_rows, img_cols = 56, 56
 channels = 3
 
-#DATA_ROOT = "/Volumes/deepstation/ocr-20171221/"
-#DATA_ROOT = "/media/deepstation/df661f44-30ab-4e78-be4b-85a6014ac61d/deepstation/ocr-20171221/"
-DATA_ROOT = "/media/deepstation/df661f44-30ab-4e78-be4b-85a6014ac61d/deepstation/mnist-20171221/"
+DATA_ROOT = "data/"
 train_data_dir = DATA_ROOT + 'train'
 validation_data_dir = DATA_ROOT + 'test'
 
@@ -92,9 +90,9 @@ if __name__ == '__main__':
     history = model.fit_generator(
         train_generator,
         steps_per_epoch = (nb_train_samples/batch_size),
-        epochs =nb_epoch,
+        epochs = nb_epoch,
         validation_data = validation_generator,
         validation_steps = (nb_val_samples/batch_size))
 
-    model.save_weights(os.path.join(result_dir, 'finetuning-mnist.h5'))
-    save_history(history, os.path.join(result_dir, 'history_finetuning-mnist.txt'))
+    model.save_weights(os.path.join(result_dir, 'models/finetuning-mnist.h5'))
+    save_history(history, os.path.join(result_dir, 'models/history_finetuning-mnist.txt'))
