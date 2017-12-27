@@ -115,7 +115,7 @@ if __name__ == '__main__':
         validation_data = validation_generator,
         validation_steps = (nb_val_samples/batch_size))
 
-    model.save_weights(os.path.join(result_dir, 'finetuning-1j.h5'))
-    save_history(history, os.path.join(result_dir, 'history_finetuning-1j.txt'))
+    model.save_weights(os.path.join(result_dir, 'models/finetuning-kaggle-mnist.h5'))
+    save_history(history, os.path.join(result_dir, 'models/history_finetuning-kaggle-mnist.txt'))
     # add for tensorboard
     KTF.set_session(old_session)

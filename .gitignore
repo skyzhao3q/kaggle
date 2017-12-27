@@ -1,2 +1,5 @@
 mnist/data
 ._*
+models
+tflog
+tmp
