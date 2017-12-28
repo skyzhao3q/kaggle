@@ -17,8 +17,12 @@ def getSubDirListOf(dirPath):
         """
         if os.path.isdir(xPath):
             dirList.append(x)
+        """
         else:
             print(x + " is not dir")
+        """
+    print(dirPath)
+    print(len(dirList))
     return dirList
 
 def getFileListOf(dirPath, ext):
@@ -52,18 +56,18 @@ def createValDir(trainDirPath, valRatio, valDirPath):
                 #shutil.move(srcPath, dstPath)
             print(str(dirList[i]) + ": " + str(len(valFileList)))
 
-def countFilesOf(dirPath):
+def countFilesOf(rootDirPath):
     # get subdirs
-    dirList = getSubDirListOf(trainDirPath)
+    dirList = getSubDirListOf(rootDirPath)
     print(len(dirList))
     # create dirs
     count = 0
     for i in range(len(dirList)):
         if not dirList[i].startswith('.'):
-            dirPath = trainDirPath + "/" + dirList[i]
+            dirPath = rootDirPath + "/" + dirList[i]
             # get files
             fileList = getFileListOf(dirPath, 'jpg')
-            print(str(dirList[i]) + ": " + str(len(fileList)))
+            #print(str(dirList[i]) + ": " + str(len(fileList)))
             count += len(fileList)
     return count
 
@@ -71,6 +75,6 @@ if __name__=="__main__":
     trainDirPath = "data/train"
     valRatio = 0.2
     valDirPath = "data/val"
-    createValDir(trainDirPath, valRatio, valDirPath)
+    #createValDir(trainDirPath, valRatio, valDirPath)
     print(countFilesOf(trainDirPath))
     print(countFilesOf(valDirPath))

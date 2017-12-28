@@ -7,11 +7,11 @@ from keras.preprocessing.image import ImageDataGenerator
 from keras import optimizers
 import numpy as np
 from smallcnn import save_history
-
+import kaggle_utils
 
 classes = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
-batch_size = 32
+batch_size = 128
 nb_classes = len(classes)
 
 img_rows, img_cols = 56, 56
@@ -19,11 +19,11 @@ channels = 3
 
 DATA_ROOT = "data/"
 train_data_dir = DATA_ROOT + 'train'
-validation_data_dir = DATA_ROOT + 'test'
+validation_data_dir = DATA_ROOT + 'val'
 
-nb_train_samples = 50000
-nb_val_samples = 10000
-nb_epoch = 50
+nb_train_samples = kaggle_utils.countFilesOf(train_data_dir)
+nb_val_samples = kaggle_utils.countFilesOf(validation_data_dir)
+nb_epoch = 100
 
 result_dir = 'results'
 if not os.path.exists(result_dir):
@@ -94,5 +94,5 @@ if __name__ == '__main__':
         validation_data = validation_generator,
         validation_steps = (nb_val_samples/batch_size))
 
-    model.save_weights(os.path.join(result_dir, 'models/finetuning-mnist.h5'))
-    save_history(history, os.path.join(result_dir, 'models/history_finetuning-mnist.txt'))
+    model.save_weights(os.path.join(result_dir, 'finetuning-mnist.h5'))
+    save_history(history, os.path.join(result_dir, 'history_finetuning-mnist.txt'))

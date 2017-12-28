@@ -64,17 +64,18 @@ model.compile(loss='categorical_crossentropy',
               metrics=['accuracy'])
 # model.summary()
 
-TestDir = "/media/deepstation/df661f44-30ab-4e78-be4b-85a6014ac61d/deepstation/1j-ocr-20171221/cut"
-#TestDir = "/media/deepstation/df661f44-30ab-4e78-be4b-85a6014ac61d/deepstation/ocr-kskdata-20171222/test-train"
+TestDir = "data/test"
 if not os.path.exists(TestDir):
   print("bad testdir")
   exit()
+"""
 parDirPath = os.path.abspath(os.path.join(TestDir, os.pardir))
 PreDir = os.path.join(parDirPath,"predict")
 createDir(PreDir)
 for i in range(len(classes)):
    dirPath = os.path.join(PreDir, classes[i])
    createDir(dirPath)
+"""
 
 #files = os.listdir(TestDir)
 files = [os.path.join(root, name)
@@ -82,9 +83,28 @@ files = [os.path.join(root, name)
              for name in files
              if name.endswith((".jpg", ".png"))]
 print(len(files))
+preList = [-1] * len(files)
+print(len(preList))
 for i in range(len(files)):
   filePath = files[i] #os.path.join(TestDir, files[i])
   predCls = getPredictCls(filePath)
+  index = int(os.path.splitext(os.path.basename(filePath))[0])
+  preList[index] = int(predCls)
+  print(i)
+
+preStrList = []
+head = "ImageId,Label"
+preStrList.append(head)
+
+for i in range(len(preList)):
+  preStr = str(i+1) + "," + str(preList[i])
+  preStrList.append(preStr)
+
+f = open("submission.csv", "w")
+f.write("\n".join(preStrList))
+f.close()
+
+"""
   dstPath = os.path.join(PreDir, predCls)
   dstPath = os.path.join(dstPath, os.path.basename(files[i]))
   try:
@@ -92,3 +112,4 @@ for i in range(len(files)):
      print(dstPath)
   except shutil.SameFileError:
      print("the same file")
+"""

@@ -1,5 +1,7 @@
 mnist/data
+mnist/__pycache__
 ._*
-models
+results
 tflog
 tmp
+.*
