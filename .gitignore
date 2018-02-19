@@ -3,18 +3,18 @@ data/
 results/
 tflog/
 tmp/
-
-# 1j-CAD2MAP
-.vscode/**/*
 input/
 output/
-work/
 log/
-tmp/
 
+# vscode env
+.vscode/**/*
+
+# MAC ENV
 ._.DS_Store
 .DS_Store
 
+# big files
 *.pkl
 *.p
 *.hdf5
